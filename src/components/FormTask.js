@@ -1,15 +1,34 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Form,Button } from 'react-bootstrap';
 import List from './List'
 
 const FormTask = () => {
+
+    let tareasLocal=JSON.parse( localStorage.getItem('taskList'))|| [];
     // state para guardar el arreglo de tareas
     // todo lo q se cambia en el maquetado y es un valor q en el tiempo va a cambiar, lo agrego al state ya que renderiza estos cambios con pocas lineas de codigo
+//inicializar el state con lo q sea q tenga la var tareasLocal, asi le decimos q en montaje busque las tareas q hay en el local
 
-    const [arregloTareas, setArregloTareas]=useState([]);
+    const [arregloTareas, setArregloTareas]=useState(tareasLocal);
 
     // componenete controlado(asiganarle a cada elemento de un form ,como un input, un state)
-    const[tarea, setTarea]= useState('');  
+    const[tarea, setTarea]= useState(''); 
+
+
+    // ciclo de vida(useEffect)
+    useEffect(()=>{
+        // toda la logica q quiero usar en el ciclo de vida
+        //asi como esta escrito el useEffect(()=>{}) : funcionaria tanto en montaje como en  actualizacion de este componenete
+        //si quiero q sea solo en montaje: agrego un parametro al final de la cfuncion anonima  useEffect(()=>{},[]) puedo poner por eljemplo [arrgloTareas] para q preste atencion en ese state, presta atencion al montaje ya ctualiacion de arrglo tareas
+        localStorage.setItem('taskList',JSON.stringify(arregloTareas));
+
+
+        
+    },[arregloTareas])
+    
+
+
+
 // pra funciones q manejan un evento react suguiere usar handle+elnombre del evvetno q esta sucediendo
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -62,3 +81,4 @@ const FormTask = () => {
 };
 
 export default FormTask;
+
