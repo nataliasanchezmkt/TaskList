@@ -45,18 +45,20 @@ const FormTask = () => {
     
     
     return (
-       <section className='form-style '>
-       <Form onSubmit={handleSubmit} > 
+       <section >
+       <Form onSubmit={handleSubmit}  > 
       
-           <Form.Group className='d-flex'>
+           <Form.Group className='d-flex justify-content-center'>
 
            <Form.Control type='text' placeholder='Escriba una tarea' onChange={e=>setTarea(e.target.value)} value={tarea} >
 
            </Form.Control>
-           <Button type='submit' className='mx-1'>
-               Cargar
+           {/* <Button type='submit' className='mx-1' >
+               Agregar
 
-           </Button>
+           </Button> */}
+
+           <button type='submit' className='mx-2 btn-style'>Add</button>
            </Form.Group>
        </Form>
       
